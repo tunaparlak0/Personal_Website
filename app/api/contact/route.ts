@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 // Buraya Resend'den aldığın "re_" ile başlayan kodu yapıştır:
-const resend = new Resend('re_Axu3kHRr_nMkjET6DwDhV6JfbTpV2erj7'); 
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
