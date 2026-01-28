@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Buraya Resend'den aldığın "re_" ile başlayan kodu yapıştır:
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
@@ -12,8 +12,8 @@ export async function POST(request: Request) {
 
     // Mail gönderme işlemi
     const data = await resend.emails.send({
-      from: 'Portfolyo İletişim <onboarding@resend.dev>', // Bunu değiştirme (Test için bu zorunlu)
-      to: 'tunaparlak001@gmail.com', // BURAYA KENDİ MAİL ADRESİNİ YAZ
+      from: 'Portfolyo İletişim <onboarding@resend.dev>', 
+      to: 'tunaparlak001@gmail.com', 
       subject: `Yeni Mesaj: ${name}`,
       html: `
         <h3>Portfolyondan Yeni Bir Mesaj Var!</h3>

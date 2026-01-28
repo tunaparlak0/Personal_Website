@@ -34,7 +34,7 @@ export default function ContactPage() {
         setFormStatus("error");
       }
     } catch {
-      // HATA ÇÖZÜMÜ: Buradaki (error) silindi, sadece catch kaldı.
+     
       setFormStatus("error");
     }
   }

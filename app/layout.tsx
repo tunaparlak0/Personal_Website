@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Tuna Parlak | Yazılım Mühendisi",
   description: "Tuna Parlak kişisel portfolyo.",
   icons: {
-    icon: "/logo.png", // Buraya dosyanın tam adını yaz (logo.jpg ise .jpg yap)
+    icon: "/logo.png", 
   },
 };
 export default function RootLayout({
