@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link"; // Yeni sayfa linki için gerekli
+import Link from "next/link"; 
 import { motion, Variants } from "framer-motion";
 
 // --- İKON KÜTÜPHANELERİ ---
-import { FaUnity, FaJava, FaReact, FaGithub, FaLinkedin, FaUser } from "react-icons/fa"; // FaUser eklendi
+import { FaUnity, FaJava, FaReact, FaGithub, FaLinkedin, FaUser, FaPaperPlane } from "react-icons/fa"; 
 import { SiPostgresql, SiMysql, SiApachecassandra, SiApachehadoop, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import { TbMathFunction, TbBrandCSharp } from "react-icons/tb";
-import { HiDownload, HiArrowRight } from "react-icons/hi"; // HiArrowRight eklendi
+import { HiArrowRight } from "react-icons/hi";
 
 export default function Home() {
   
@@ -75,9 +75,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white scroll-smooth overflow-x-hidden">
+    <main className="min-h-screen bg-gray-900 text-white scroll-smooth overflow-x-hidden font-sans">
       
-      {/* --- HERO SECTION (GÜNCELLENDİ) --- */}
+      {/* --- HERO SECTION --- */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
@@ -85,12 +85,10 @@ export default function Home() {
         variants={fadeInUp}
         className="flex flex-col items-center justify-center min-h-[90vh] p-4 text-center"
       >
-        <div className="space-y-8 max-w-2xl flex flex-col items-center">
+        <div className="space-y-8 max-w-4xl flex flex-col items-center">
           
-          {/* --- PROFİL RESMİ KALDIRILDI --- */}
-
           <div>
-            <h1 className="text-6xl font-extrabold tracking-tight">
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
               Merhaba, Ben <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">Tuna Parlak</span>
             </h1>
             <h2 className="text-2xl text-gray-300 font-light mt-4">
@@ -98,7 +96,6 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Sosyal İkonlar */}
           <div className="flex gap-6 justify-center">
             <a href={socialLinks.github} target="_blank" className="text-gray-400 hover:text-white hover:scale-125 transition-transform duration-300" aria-label="Github">
               <FaGithub size={32} />
@@ -108,15 +105,11 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Kısa Özet */}
           <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
             Sakarya Üniversitesi&apos;nde eğitimime devam ediyorum. Kod yazarak karmaşık problemleri çözmeyi ve sanal dünyalar yaratmayı seviyorum.
           </p>
 
-          {/* Butonlar (GÜNCELLENDİ: Hakkımda Butonu Eklendi) */}
           <div className="flex flex-wrap gap-4 justify-center mt-4">
-            
-            {/* HAKKIMDA BUTONU (YENİ) */}
             <Link href="/about" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white hover:-translate-y-1 group">
               <FaUser />
               Hakkımda
@@ -127,10 +120,11 @@ export default function Home() {
               Projelerimi Gör 
             </a>
             
-            <a href="/Tuna-Parlak-CV.pdf" download="Tuna_Parlak_CV.pdf" className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1">
-              <HiDownload size={20} />
-              CV
-            </a>
+            {/* GÜNCELLEME: Link butonu artık /contact sayfasına gidiyor */}
+            <Link href="/contact" className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1">
+              <FaPaperPlane />
+              İletişim
+            </Link>
           </div>
         </div>
       </motion.section>
@@ -161,7 +155,6 @@ export default function Home() {
                 <div className="flex flex-col gap-3">
                   {skillGroup.items.map((item, i) => (
                     <div key={i} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors">
-                      {/* İkon */}
                       <span className={`text-2xl ${item.color}`}>
                         <item.icon />
                       </span>
@@ -222,7 +215,7 @@ export default function Home() {
         </div>
       </motion.section>
       
-      {/* Footer - Dinamik Yıl ve Kalp Emojili */}
+      {/* Footer */}
       <footer className="py-8 text-center text-gray-500 text-sm border-t border-gray-800 bg-gray-900">
         <p className="mb-2">© {new Date().getFullYear()} Tuna Parlak | Yazılım Mühendisi & Oyun Geliştirici</p>
         <p className="text-xs text-gray-600">
