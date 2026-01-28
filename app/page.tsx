@@ -94,6 +94,9 @@ export default function Home() {
             <h2 className="text-2xl text-gray-300 font-light mt-4">
               Yazılım Mühendisliği Öğrencisi & Oyun Geliştirici
             </h2>
+            <h2 className="text-2xl text-gray-300 font-light mt-4">
+              Site hala yapım aşamasında olup hakkımdaki bilgiler tam değildir.Test amaçlı yayında şuan.
+            </h2>
           </div>
 
           <div className="flex gap-6 justify-center">
