@@ -59,7 +59,7 @@ export default function ContactPage() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
-
+console.log("Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
   return (
     <main className="min-h-screen bg-gray-900 text-white p-6 md:p-12 overflow-x-hidden font-sans">
       
