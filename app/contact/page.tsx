@@ -1,16 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { HiArrowLeft } from "react-icons/hi";
 import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt, FaCheck, FaTimes } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
+    // Eğer Captcha işaretlenmemişse uyarı ver ve işlemi durdur
+    if (!captchaToken) {
+        alert("Lütfen robot olmadığınızı doğrulayın.");
+        return;
+    }
+
     setFormStatus("loading");
 
     const formData = new FormData(e.currentTarget);
@@ -18,6 +28,7 @@ export default function ContactPage() {
       name: formData.get("name"),
       email: formData.get("email"),
       message: formData.get("message"),
+      captchaToken: captchaToken, // Token'ı backend'e gönderiyoruz
     };
 
     try {
@@ -30,12 +41,17 @@ export default function ContactPage() {
       if (response.ok) {
         setFormStatus("success");
         (e.target as HTMLFormElement).reset();
+        setCaptchaToken(null);
+        recaptchaRef.current?.reset(); // Captcha'yı sıfırla
       } else {
         setFormStatus("error");
+        setCaptchaToken(null);
+        recaptchaRef.current?.reset();
       }
     } catch {
-     
       setFormStatus("error");
+      setCaptchaToken(null);
+      recaptchaRef.current?.reset();
     }
   }
 
@@ -75,12 +91,9 @@ export default function ContactPage() {
                 {/* Sol Taraf: Bilgiler */}
                 <div className="space-y-8">
                     <div>
-                        <h3 className="text-2xl font-semibold text-white mb-4">İletişim</h3>
+                        <h3 className="text-2xl font-semibold text-white mb-4">Bir projeniz mi var?</h3>
                         <p className="text-gray-400 leading-relaxed text-lg">
-                            Herhangi bir geri dönüş, iş/staj teklif vs. için iletişime geçebilirsiniz.
-                        </p>
-                        <p className="text-gray-400 leading-relaxed text-lg">
-                            NOT:Geri dönüş sağlayabilmem için doğru email adresinizi yazmanız önemle rica olunur.
+                            Oyun geliştirme, backend sistemleri veya iş birliği fırsatları için benimle iletişime geçebilirsiniz. Mesajlarınıza en kısa sürede dönüş yapacağım.
                         </p>
                     </div>
                     
@@ -89,13 +102,13 @@ export default function ContactPage() {
                             <div className="p-3 bg-blue-900/30 rounded-full text-blue-400">
                                 <FaMapMarkerAlt size={20} />
                             </div>
-                            <span className="text-lg">Sakarya-Adana, Türkiye</span>
+                            <span className="text-lg">Sakarya, Türkiye</span>
                         </div>
                         <div className="flex items-center gap-4 text-gray-300">
                             <div className="p-3 bg-blue-900/30 rounded-full text-blue-400">
                                 <FaEnvelope size={20} />
                             </div>
-                            <span className="text-lg">tunaparlak001@gmail.com</span>
+                            <span className="text-lg">iletisim@tunaparlak.com</span>
                         </div>
                     </div>
                 </div>
@@ -132,15 +145,27 @@ export default function ContactPage() {
                         ></textarea>
                     </div>
 
+                    {/* RECAPTCHA ALANI */}
+                    <div className="flex justify-center md:justify-start">
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                            onChange={(token) => setCaptchaToken(token)}
+                            theme="dark"
+                        />
+                    </div>
+
                     <button 
                       type="submit" 
-                      disabled={formStatus === 'loading' || formStatus === 'success'}
+                      disabled={formStatus === 'loading' || formStatus === 'success' || !captchaToken}
                       className={`w-full font-bold text-lg py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ${
                         formStatus === 'success' 
                           ? 'bg-green-600 hover:bg-green-700 text-white cursor-default' 
                           : formStatus === 'error'
                           ? 'bg-red-600 hover:bg-red-700 text-white'
-                          : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-500/25 hover:-translate-y-1'
+                          : !captchaToken 
+                            ? 'bg-gray-600 cursor-not-allowed opacity-50' // Captcha yoksa sönük
+                            : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-500/25 hover:-translate-y-1'
                       }`}
                     >
                         {formStatus === 'loading' && <span className="animate-spin mr-2">⏳</span>}
