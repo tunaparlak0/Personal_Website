@@ -149,7 +149,7 @@ export default function ContactPage() {
                     <div className="flex justify-center md:justify-start">
                         <ReCAPTCHA
                             ref={recaptchaRef}
-                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                            sitekey="6LeKyFosAAAAANBUSTMDAtiYxKzbDObVDdD3m7Uy"
                             onChange={(token) => setCaptchaToken(token)}
                             theme="dark"
                         />
