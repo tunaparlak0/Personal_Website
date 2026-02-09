@@ -102,13 +102,13 @@ export default function ContactPage() {
                             <div className="p-3 bg-blue-900/30 rounded-full text-blue-400">
                                 <FaMapMarkerAlt size={20} />
                             </div>
-                            <span className="text-lg">Sakarya, Türkiye</span>
+                            <span className="text-lg">Sakarya-Adana, Türkiye</span>
                         </div>
                         <div className="flex items-center gap-4 text-gray-300">
                             <div className="p-3 bg-blue-900/30 rounded-full text-blue-400">
                                 <FaEnvelope size={20} />
                             </div>
-                            <span className="text-lg">iletisim@tunaparlak.com</span>
+                            <span className="text-lg">tunaparlak001@gmail.com</span>
                         </div>
                     </div>
                 </div>
