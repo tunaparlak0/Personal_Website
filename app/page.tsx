@@ -92,7 +92,7 @@ export default function Home() {
               Merhaba, Ben <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">Tuna Parlak</span>
             </h1>
             <h2 className="text-2xl text-gray-300 font-light mt-4">
-              Yazılım Mühendisliği Öğrencisi & Oyun Geliştirici
+              Sakarya Üniversitesi Yazılım Mühendisliği 3.Sınıf Öğrencisi 
             </h2>
             <h2 className="text-2xl text-gray-300 font-light mt-4">
               Site hala yapım aşamasında olup hakkımdaki bilgiler tam değildir.Test amaçlı yayında şuan.
@@ -108,9 +108,6 @@ export default function Home() {
             </a>
           </div>
 
-          <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-            Sakarya Üniversitesi&apos;nde eğitimime devam ediyorum. Kod yazarak karmaşık problemleri çözmeyi ve sanal dünyalar yaratmayı seviyorum.
-          </p>
 
           <div className="flex flex-wrap gap-4 justify-center mt-4">
             <Link href="/about" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white hover:-translate-y-1 group">

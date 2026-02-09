@@ -91,9 +91,9 @@ export default function ContactPage() {
                 {/* Sol Taraf: Bilgiler */}
                 <div className="space-y-8">
                     <div>
-                        <h3 className="text-2xl font-semibold text-white mb-4">Bir projeniz mi var?</h3>
+                        <h3 className="text-2xl font-semibold text-white mb-4">İletişime geçmek için</h3>
                         <p className="text-gray-400 leading-relaxed text-lg">
-                            Oyun geliştirme, backend sistemleri veya iş birliği fırsatları için benimle iletişime geçebilirsiniz. Mesajlarınıza en kısa sürede dönüş yapacağım.
+                            İş/Staj, proje teklifleri, site için geri dönüş veya herhangi bir şey için eposta yolu ile benle iletişime geçebilirsiniz. Mesajlarınıza en kısa sürede dönüş yapacağım.
                         </p>
                     </div>
                     

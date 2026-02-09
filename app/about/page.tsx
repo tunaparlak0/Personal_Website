@@ -74,24 +74,19 @@ export default function AboutPage() {
           className="mt-0 w-full bg-gray-800 p-10 rounded-[80px] border border-gray-700/50 shadow-2xl text-left space-y-6"
         >
           <p className="text-gray-300 leading-relaxed text-lg">
-            Merhaba! Ben Tuna. Sakarya Üniversitesi&apos;nde Yazılım Mühendisliği
-            eğitimi alıyorum. Teknolojiye olan merakım, beni karmaşık problemleri
-            kod yazarak çözmeye ve sanal dünyalar yaratmaya yönlendirdi.
+            Merhaba! Ben Tuna. Sakarya Üniversitesi&apos;nde Yazılım Mühendisliği(İngilizce)
+            3.sınıf öğrencisiyim.
           </p>
 
           <p className="text-gray-300 leading-relaxed text-lg">
-            Özellikle <strong className="text-blue-400">Unity Engine</strong> ile
-            oyun geliştirme süreçlerine tutkuyla bağlıyım. Bir oyunun sadece
-            koddan ibaret olmadığını; fizik, matematik ve yaratıcı tasarımın
-            birleşimi olduğunu biliyorum. Bunun yanı sıra, arka planda (backend)
-            büyük verilerin nasıl işlendiğini anlamak için{" "}
-            <strong className="text-purple-400">Big Data</strong> ve veritabanı
-            sistemleri üzerine de çalışmalar yapıyorum.
+            Matematik ve bilgisayara olan merakım beni yazılıma yönlendirdi.
+            Öğrenmeye açık biriyim ve sürekli kendimi geliştirmeye çalışıyorum.
+          
           </p>
 
           <p className="text-gray-300 leading-relaxed text-lg">
-            Hedefim, hem oyunculara keyifli deneyimler sunan oyunlar geliştirmek
-            hem de ölçeklenebilir, sağlam yazılım mimarileri kurmak.
+            Oyun geliştirme, büyük veri analizi ve yapay zeka gibi alanlara ilgim var.
+            
           </p>
 
           {/* Eğitim Bölümü */}
@@ -102,7 +97,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-xl font-bold text-white">Eğitim</h3>
               <p className="text-gray-400">
-                Sakarya Üniversitesi — Yazılım Mühendisliği (Lisans)
+                Sakarya Üniversitesi — Yazılım Mühendisliği (İngilizce)(Lisans)
               </p>
             </div>
           </div>
