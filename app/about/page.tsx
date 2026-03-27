@@ -105,7 +105,7 @@ export default function AboutPage() {
         <div className="mt-12 mb-10">
           <a
             href="/Tuna-Parlak-CV.pdf"
-            download="Tuna_Parlak_CV.pdf"
+            download="Tuna-Parlak-CV.pdf"
             className="
               inline-flex items-center justify-center gap-3
               px-10 py-4
