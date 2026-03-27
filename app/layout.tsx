@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+// 👇 ParticlesBackground'u buraya import ediyoruz
+import ParticlesBackground from "../components/ParticlesBackground";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tuna Parlak | Yazılım Mühendisi",
   description: "Tuna Parlak kişisel portfolyo.",
-  icons: {
-    icon: "/logo.png", 
-  },
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,10 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      {/* 👇 1. ARKA PLAN RENGİNİ VE YAZI RENGİNİ BURADA TANIMLIYORUZ */}
+      <body className={`${inter.className} bg-gray-900 text-white`}>
+        
+        {/* 👇 2. EFEKTİ TÜM SAYFALARIN ARKASINA SABİTLEYECEK BİLEŞEN */}
+        <ParticlesBackground />
+        
+        {/* 👇 3. İÇERİKLERİN EFEKTİN ÜSTÜNDE DURMASI İÇİN relative VE z-10 EKLİYORUZ */}
+        <div className="relative z-10">
+            {children}
+        </div>
       </body>
     </html>
   );
