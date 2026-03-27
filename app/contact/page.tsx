@@ -15,7 +15,6 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     
-    // Eğer Captcha işaretlenmemişse uyarı ver ve işlemi durdur
     if (!captchaToken) {
         alert("Lütfen robot olmadığınızı doğrulayın.");
         return;
@@ -28,7 +27,7 @@ export default function ContactPage() {
       name: formData.get("name"),
       email: formData.get("email"),
       message: formData.get("message"),
-      captchaToken: captchaToken, // Token'ı backend'e gönderiyoruz
+      captchaToken: captchaToken,
     };
 
     try {
@@ -42,7 +41,7 @@ export default function ContactPage() {
         setFormStatus("success");
         (e.target as HTMLFormElement).reset();
         setCaptchaToken(null);
-        recaptchaRef.current?.reset(); // Captcha'yı sıfırla
+        recaptchaRef.current?.reset();
       } else {
         setFormStatus("error");
         setCaptchaToken(null);
@@ -61,14 +60,15 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-6 md:p-12 overflow-x-hidden font-sans">
+    /* 👇 DEĞİŞİKLİK: bg-gray-900 sildiğimiz için arkadaki yıldızlar görünecek */
+    <main className="min-h-screen text-white p-6 md:p-12 overflow-x-hidden font-sans relative">
       
       {/* Geri Dön Butonu */}
       <motion.div 
         initial={{ opacity: 0, x: -20 }} 
         animate={{ opacity: 1, x: 0 }} 
         transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto w-full"
+        className="max-w-4xl mx-auto w-full relative z-10"
       >
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8 group">
             <HiArrowLeft className="group-hover:-translate-x-1 transition-transform"/> Ana Sayfaya Dön
@@ -79,13 +79,14 @@ export default function ContactPage() {
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl mx-auto relative z-10"
       >
         <h1 className="text-4xl md:text-5xl font-bold text-center text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500 mb-12">
             İletişime Geç
         </h1>
 
-        <div className="bg-gray-800 p-8 md:p-12 rounded-3xl border border-gray-700 shadow-2xl">
+        {/* 👇 DEĞİŞİKLİK: Arka plana hafif şeffaflık (bg-gray-800/80) ve bulanıklık ekledik */}
+        <div className="bg-gray-800/80 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-gray-700 shadow-2xl">
             <div className="grid md:grid-cols-2 gap-12">
                 
                 {/* Sol Taraf: Bilgiler */}
@@ -93,7 +94,7 @@ export default function ContactPage() {
                     <div>
                         <h3 className="text-2xl font-semibold text-white mb-4">İletişime geçmek için</h3>
                         <p className="text-gray-400 leading-relaxed text-lg">
-                            İş/Staj, proje teklifleri, site için geri dönüş veya herhangi bir şey için eposta yolu ile benle iletişime geçebilirsiniz. Mesajlarınıza en kısa sürede dönüş yapacağım.
+                            İş/Staj, proje teklifleri veya geri dönüşler için e-posta yolu ile benimle iletişime geçebilirsiniz. En kısa sürede dönüş yapacağım.
                         </p>
                     </div>
                     
@@ -120,7 +121,7 @@ export default function ContactPage() {
                         <input 
                           type="text" name="name" id="name" required 
                           disabled={formStatus === 'loading' || formStatus === 'success'}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50" 
+                          className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50" 
                           placeholder="Adınız Soyadınız" 
                         />
                     </div>
@@ -130,7 +131,7 @@ export default function ContactPage() {
                         <input 
                           type="email" name="email" id="email" required 
                           disabled={formStatus === 'loading' || formStatus === 'success'}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50" 
+                          className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50" 
                           placeholder="ornek@mail.com" 
                         />
                     </div>
@@ -140,12 +141,11 @@ export default function ContactPage() {
                         <textarea 
                           name="message" id="message" rows={5} required 
                           disabled={formStatus === 'loading' || formStatus === 'success'}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none disabled:opacity-50" 
+                          className="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none disabled:opacity-50" 
                           placeholder="Mesajınızı buraya yazın..."
                         ></textarea>
                     </div>
 
-                    {/* RECAPTCHA ALANI */}
                     <div className="flex justify-center md:justify-start">
                         <ReCAPTCHA
                             ref={recaptchaRef}
@@ -160,11 +160,11 @@ export default function ContactPage() {
                       disabled={formStatus === 'loading' || formStatus === 'success' || !captchaToken}
                       className={`w-full font-bold text-lg py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ${
                         formStatus === 'success' 
-                          ? 'bg-green-600 hover:bg-green-700 text-white cursor-default' 
+                          ? 'bg-green-600 text-white cursor-default' 
                           : formStatus === 'error'
-                          ? 'bg-red-600 hover:bg-red-700 text-white'
+                          ? 'bg-red-600 text-white'
                           : !captchaToken 
-                            ? 'bg-gray-600 cursor-not-allowed opacity-50' // Captcha yoksa sönük
+                            ? 'bg-gray-600 cursor-not-allowed opacity-50' 
                             : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-500/25 hover:-translate-y-1'
                       }`}
                     >
