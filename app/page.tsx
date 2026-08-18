@@ -5,8 +5,7 @@ import { motion, Variants } from "framer-motion";
 
 // --- İKON KÜTÜPHANELERİ ---
 import { FaUnity, FaJava, FaReact, FaGithub, FaLinkedin, FaUser, FaPaperPlane, FaDocker } from "react-icons/fa"; 
-import { SiPostgresql, SiMysql, SiApachecassandra, SiApachehadoop, SiNextdotjs, SiTypescript, SiTailwindcss, SiFlutter, SiDart, SiDotnet } from "react-icons/si";
-import { TbMathFunction, TbBrandCSharp } from "react-icons/tb"; // 👈 Hata veren importlar buraya eklendi
+import { SiPostgresql, SiMysql, SiApachecassandra, SiApachehadoop, SiNextdotjs, SiTypescript, SiTailwindcss, SiFlutter, SiDart, SiDotnet, SiPrisma, SiFastify, SiJavascript } from "react-icons/si";import { TbMathFunction, TbBrandCSharp } from "react-icons/tb";
 import { HiArrowRight } from "react-icons/hi";
 
 export default function Home() {
@@ -22,9 +21,9 @@ export default function Home() {
       items: [
         { name: "Java & Spring Boot", icon: FaJava, color: "text-red-500" },
         { name: ".NET Core", icon: SiDotnet, color: "text-purple-500" },
+        { name: "Node.js & Fastify", icon: SiFastify, color: "text-white" },
+        { name: "Prisma ORM", icon: SiPrisma, color: "text-teal-400" },
         { name: "Docker", icon: FaDocker, color: "text-blue-500" },
-        { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-400" },
-        { name: "MySQL", icon: SiMysql, color: "text-blue-600" }, // 👈 Kullanılmayan uyarısı bu sayede giderildi
         { name: "Git", icon: FaGithub, color: "text-white" },
       ]
     },
@@ -35,6 +34,8 @@ export default function Home() {
         { name: "Apache Spark", icon: SiApachehadoop, color: "text-orange-400" },
         { name: "Cassandra (NoSQL)", icon: SiApachecassandra, color: "text-blue-300" },
         { name: "HDFS", icon: SiApachehadoop, color: "text-yellow-500" },
+        { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-400" },
+        { name: "MySQL", icon: SiMysql, color: "text-blue-600" },
       ]
     },
     {
@@ -50,15 +51,22 @@ export default function Home() {
     {
       category: "Web Teknolojileri",
       items: [
-        { name: "Next.js", icon: SiNextdotjs, color: "text-white" },
+        { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" }, // JavaScript eklendi
         { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
-        { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-400" },
+        { name: "Next.js", icon: SiNextdotjs, color: "text-white" },
         { name: "React", icon: FaReact, color: "text-cyan-300" },
+        { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-400" },
       ]
     }
   ];
 
   const projects = [
+    {
+      title: "Full-Stack Su ve Fatura Yönetim Sistemi",
+      description: "Fastify ve Prisma ORM ile geliştirilen backend servisi ile PostgreSQL veritabanı yönetimi sağlayan; React tabanlı arayüze sahip tam kapsamlı su yönetim sistemi.",
+      tags: ["Fastify", "React", "Prisma", "PostgreSQL", "JavaScript","JWT"],
+      link: "https://github.com/tunaparlak0/su_sistemi"
+    },
     {
       title: "Cloud Native DevOps Pipeline",
       description: "Spring Boot uygulamasının Dockerize edilerek AWS EC2 ortamına taşındığı, Nginx Reverse Proxy ile yapılandırılmış tam kapsamlı dağıtım mimarisi.",
@@ -67,7 +75,7 @@ export default function Home() {
     },
     {
       title: "Social Gaming App (Work in Progress)",
-      description: "Flutter kullanılarak geliştirilen; içerisinde Vampir-Köylü ve Tabu gibi popüler oyunları barındıran, karmaşık oylama mekanizmalarına ve rol dağıtım sistemlerine sahip mobil oyun platformu. ",
+      description: "Flutter kullanılarak geliştirilen; içerisinde Vampir-Köylü ve Tabu gibi popüler oyunları barındıran, karmaşık oylama mekanizmalarına ve rol dağıtım sistemlerine sahip mobil oyun platformu.",
       tags: ["Flutter", "Dart", "Mobile Game", "State Management"],
       link: "https://github.com/tunaparlak0/oyun_kutusu"
     },
@@ -79,7 +87,7 @@ export default function Home() {
     },
     {
       title: "Unity 2D Oyun Projesi",
-      description: "C# ve Unity motoru kullanılarak geliştirilen, 2D fizik tabanlı mekanikleri ,objeler arası etkileşimleri ve oyun içi arayüzleri test ettiğim tamamlanmamış bir proje.",
+      description: "C# ve Unity motoru kullanılarak geliştirilen, 2D fizik tabanlı mekanikleri, objeler arası etkileşimleri ve oyun içi arayüzleri test ettiğim tamamlanmamış bir proje.",
       tags: ["Unity 2D", "C#", "Physics", "OOP"],
       link: "https://github.com/tunaparlak0/2dUnity"
     },
@@ -113,7 +121,7 @@ export default function Home() {
               Merhaba, Ben <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">Tuna Parlak</span>
             </h1>
             <h2 className="text-2xl text-gray-300 font-light mt-4">
-              Sakarya Üniversitesi Yazılım Mühendisliği 3.Sınıf Öğrencisi
+              Sakarya Üniversitesi Yazılım Mühendisliği 4. Sınıf Öğrencisi
             </h2>
           </div>
 

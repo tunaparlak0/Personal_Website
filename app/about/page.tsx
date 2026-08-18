@@ -71,7 +71,7 @@ export default function AboutPage() {
           className="mt-0 w-full bg-gray-800/80 backdrop-blur-md p-10 rounded-[40px] md:rounded-[80px] border border-gray-700/50 shadow-2xl text-left space-y-6"
         >
           <p className="text-gray-300 leading-relaxed text-lg">
-            Merhaba! Ben Tuna. Sakarya Üniversitesi&apos;nde Yazılım Mühendisliği (İngilizce) 3. sınıf öğrencisiyim.
+            Merhaba! Ben Tuna. Sakarya Üniversitesi&apos;nde Yazılım Mühendisliği (İngilizce) 4. sınıf öğrencisiyim.
           </p>
 
           <p className="text-gray-300 leading-relaxed text-lg">
