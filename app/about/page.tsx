@@ -11,7 +11,7 @@ export default function AboutPage() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
-
+//
   return (
     <main className="min-h-screen text-white p-6 md:p-12 overflow-x-hidden font-sans relative isolate">
       
