@@ -281,7 +281,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {projects.map((project, index) => (
               /* Sabit yukseklikli yuva: kart hover'da buyurken diger kartlari itmesin */
-              <div key={index} className="relative md:h-[320px] lg:h-[280px]">
+              <div key={index} className="relative md:h-80 lg:h-70">
                 <motion.div
                   whileHover={{ y: -10 }}
                   className="group relative md:absolute md:inset-x-0 md:top-0 md:min-h-full bg-gray-800/80 hover:bg-gray-800 backdrop-blur-sm rounded-xl shadow-xl flex flex-col border border-gray-700 hover:border-blue-500/50 hover:shadow-blue-500/10 hover:z-20 transition-colors"

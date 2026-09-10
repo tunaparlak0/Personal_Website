@@ -112,7 +112,7 @@ export default function AboutPage() {
             className="
               inline-flex items-center justify-center gap-3
               px-10 py-4
-              bg-gradient-to-r from-blue-500 to-purple-600
+              bg-linear-to-r from-blue-500 to-purple-600
               text-white rounded-full
               font-bold text-lg
               border border-blue-400/40
