@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { HiDownload, HiArrowLeft } from "react-icons/hi";
 import { FaGraduationCap } from "react-icons/fa";
 
 export default function AboutPage() {
+  const [showCvOptions, setShowCvOptions] = useState(false);
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -101,11 +103,12 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* CV İndir Butonu */}
-        <div className="mt-12 mb-10">
-          <a
-            href="/Tuna-Parlak-CV.pdf"
-            download="Tuna-Parlak-CV.pdf"
+        {/* CV İndir Butonu — dil seçimi sorulur */}
+        <div className="mt-12 mb-10 flex flex-col items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setShowCvOptions((prev) => !prev)}
+            aria-expanded={showCvOptions}
             className="
               inline-flex items-center justify-center gap-3
               px-10 py-4
@@ -121,7 +124,43 @@ export default function AboutPage() {
           >
             <HiDownload size={24} />
             CV&apos;mi İndir
-          </a>
+          </button>
+
+          <AnimatePresence>
+            {showCvOptions && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="w-full max-w-md rounded-2xl border border-gray-700 bg-gray-900/70 backdrop-blur-sm p-5 text-center"
+              >
+                <p className="text-gray-300 mb-4">
+                  Hangi dildeki versiyonu indirmek istersiniz?
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <a
+                    href="/Tuna_Parlak_CV_TR.pdf"
+                    download="Tuna_Parlak_CV_TR.pdf"
+                    onClick={() => setShowCvOptions(false)}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+                  >
+                    <HiDownload size={20} />
+                    Türkçe
+                  </a>
+                  <a
+                    href="/Tuna_Parlak_CV_EN.pdf"
+                    download="Tuna_Parlak_CV_EN.pdf"
+                    onClick={() => setShowCvOptions(false)}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-colors"
+                  >
+                    <HiDownload size={20} />
+                    English
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     </main>

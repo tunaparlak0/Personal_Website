@@ -11,6 +11,7 @@ export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -147,12 +148,18 @@ export default function ContactPage() {
                     </div>
 
                     <div className="flex justify-center md:justify-start">
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                            onChange={(token) => setCaptchaToken(token)}
-                            theme="dark"
-                        />
+                        {siteKey ? (
+                          <ReCAPTCHA
+                              ref={recaptchaRef}
+                              sitekey={siteKey}
+                              onChange={(token) => setCaptchaToken(token)}
+                              theme="dark"
+                          />
+                        ) : (
+                          <p className="text-sm text-red-400 border border-red-500/40 bg-red-900/20 rounded-xl px-4 py-3">
+                            reCAPTCHA yapılandırılmamış: NEXT_PUBLIC_RECAPTCHA_SITE_KEY tanımlı değil.
+                          </p>
+                        )}
                     </div>
 
                     <button 
