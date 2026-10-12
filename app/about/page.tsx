@@ -89,6 +89,11 @@ export default function AboutPage() {
             sayede projelerin ve öğrenme sürecimin daha hızlı ve kaliteli bir
             şekilde ilerlemesini sağlıyorum.
           </p>
+          <p className="text-gray-300 leading-relaxed text-lg">
+            {/* Kendi cümlelerini buraya ekleyebilirsin */}
+            Ayrıca, canva üzerinden tasarım yapıyorum. Dahil olduğum kulüp
+            bünyesinde etkinlik duyuruları vs için afiş vb tasarımlar yapıyorum.
+          </p>
 
           {/* Eğitim Bölümü */}
           <div className="mt-8 pt-8 border-t border-gray-700/50 flex flex-col items-center justify-center text-center gap-3">
