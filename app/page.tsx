@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 import { BlurFade } from "@/components/ui/blur-fade";
 import { TechMarquee } from "@/components/tech-marquee";
@@ -73,6 +73,15 @@ export default function Home() {
                   className="inline-flex size-10 items-center justify-center rounded-xl border border-border-token bg-card text-muted-fg transition-colors hover:text-foreground"
                 >
                   <FaLinkedin size={17} />
+                </a>
+                <a
+                  href={profile.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex size-10 items-center justify-center rounded-xl border border-border-token bg-card text-muted-fg transition-colors hover:text-foreground"
+                >
+                  <FaInstagram size={17} />
                 </a>
               </div>
 

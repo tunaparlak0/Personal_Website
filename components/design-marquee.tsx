@@ -20,7 +20,12 @@ export function DesignMarquee() {
   return (
     <div className="space-y-4">
       {rows.map((row, rowIndex) => (
-        <Marquee key={rowIndex} duration={50} reverse={rowIndex === 1}>
+        <Marquee
+          key={rowIndex}
+          duration={50}
+          reverse={rowIndex === 1}
+          repeat={4}
+        >
           {row.map((asset, i) => {
             const index = rowIndex * half + i;
             const meta = t.designs.items[index];

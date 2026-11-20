@@ -40,7 +40,7 @@ export function TechMarquee() {
   return (
     <div className="space-y-6">
       {rows.map((row, i) => (
-        <Marquee key={i} duration={46 + i * 6} reverse={i === 1}>
+        <Marquee key={i} duration={46 + i * 6} reverse={i === 1} repeat={3}>
           {row.map((tech) => (
             <TechTile key={tech.name} tech={tech} />
           ))}

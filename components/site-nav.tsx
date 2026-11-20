@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
+import { CvDownload } from "@/components/cv-download";
 import { useLocale } from "@/components/locale-provider";
 import { profile } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -53,6 +54,7 @@ export function SiteNav() {
         </div>
 
         <div className="flex items-center gap-2">
+          <CvDownload variant="icon" />
           <LanguageToggle />
           <ThemeToggle />
           <button

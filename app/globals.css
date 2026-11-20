@@ -58,13 +58,14 @@ html.theme-ready body * {
 }
 
 /* Marquee animasyonlari — iki kopya yan yana oldugu icin -50% tam bir tur eder */
+/* Her kopya kendi genisligi kadar kayar; sonraki kopya tam yerine gecer. */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-100%); }
 }
 
 @keyframes marquee-reverse {
-  from { transform: translateX(-50%); }
+  from { transform: translateX(-100%); }
   to { transform: translateX(0); }
 }
 

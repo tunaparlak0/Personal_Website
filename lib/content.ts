@@ -8,10 +8,11 @@ export const locales: Locale[] = ["tr", "en"];
 
 export const profile = {
   name: "Tuna Parlak",
-  location: "Sakarya / Adana",
+  location: "Sakarya / Adana, Türkiye",
   email: "tunaparlak001@gmail.com",
   github: "https://github.com/tunaparlak0",
   linkedin: "https://www.linkedin.com/in/tuna-parlak-276668351/",
+  instagram: "https://www.instagram.com/tunaparlak_/",
 };
 
 /** logo: public/tech altindaki dosya adi; yoksa bas harfler gosterilir. */
@@ -52,6 +53,59 @@ export const techStack: Tech[] = [
   { name: "Dart", logo: "dart" },
   { name: "Unity", logo: "unity" },
   { name: "Figma", logo: "figma" },
+];
+
+export type SkillCategory = { id: string; items: Tech[] };
+
+/** Hakkimda sayfasindaki tablo icin gruplanmis liste. */
+export const skillCategories: SkillCategory[] = [
+  {
+    id: "backend",
+    items: [
+      { name: "Java & Spring Boot", logo: "springboot" },
+      { name: ".NET Core", logo: "dotnet" },
+      { name: "Node.js & Fastify", logo: "fastify" },
+      { name: "Prisma ORM", logo: "prisma" },
+      { name: "Docker", logo: "docker" },
+      { name: "Nginx", logo: "nginx" },
+      { name: "AWS EC2" },
+      { name: "Git", logo: "git" },
+    ],
+  },
+  {
+    id: "data",
+    items: [
+      { name: "Apache Kafka", logo: "apachekafka" },
+      { name: "Apache Spark", logo: "apachespark" },
+      { name: "Hadoop HDFS", logo: "apachehadoop" },
+      { name: "Cassandra", logo: "apachecassandra" },
+      { name: "Redis", logo: "redis" },
+      { name: "PostgreSQL", logo: "postgresql" },
+      { name: "MySQL", logo: "mysql" },
+    ],
+  },
+  {
+    id: "game",
+    items: [
+      { name: "Unity Engine", logo: "unity" },
+      { name: "C#" },
+      { name: "Flutter", logo: "flutter" },
+      { name: "Dart", logo: "dart" },
+      { name: "Python", logo: "python" },
+    ],
+  },
+  {
+    id: "web",
+    items: [
+      { name: "JavaScript", logo: "javascript" },
+      { name: "TypeScript", logo: "typescript" },
+      { name: "Next.js", logo: "nextdotjs" },
+      { name: "React", logo: "react" },
+      { name: "Tailwind CSS", logo: "tailwindcss" },
+      { name: "Vite", logo: "vite" },
+      { name: "Figma", logo: "figma" },
+    ],
+  },
 ];
 
 export type Design = {
@@ -155,6 +209,13 @@ const tr = {
     ],
     educationTitle: "Eğitim",
     languagesTitle: "Diller",
+    techTitle: "Üzerinde Çalıştığım Teknolojiler",
+    techCategories: {
+      backend: "Backend & DevOps",
+      data: "Veri Mühendisliği (Big Data)",
+      game: "Oyun & Mobil Geliştirme",
+      web: "Web Teknolojileri",
+    },
     languages: [
       { name: "Türkçe", level: "Ana dil" },
       { name: "İngilizce", level: "B2 (Orta-İleri Seviye)" },
@@ -372,6 +433,13 @@ const en: typeof tr = {
     ],
     educationTitle: "Education",
     languagesTitle: "Languages",
+    techTitle: "Technologies I Work With",
+    techCategories: {
+      backend: "Backend & DevOps",
+      data: "Data Engineering (Big Data)",
+      game: "Game & Mobile Development",
+      web: "Web Technologies",
+    },
     languages: [
       { name: "Turkish", level: "Native" },
       { name: "English", level: "B2 (Upper-Intermediate)" },

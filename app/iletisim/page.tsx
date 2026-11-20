@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail, MapPin } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 import { PageHeader, PageShell } from "@/components/page-header";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -54,6 +54,15 @@ export default function ContactPage() {
                 className="inline-flex size-10 items-center justify-center rounded-xl border border-border-token text-muted-fg transition-colors hover:text-foreground"
               >
                 <FaLinkedin size={17} />
+              </a>
+              <a
+                href={profile.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="inline-flex size-10 items-center justify-center rounded-xl border border-border-token text-muted-fg transition-colors hover:text-foreground"
+              >
+                <FaInstagram size={17} />
               </a>
             </div>
           </div>

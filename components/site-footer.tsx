@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 import { useLocale } from "@/components/locale-provider";
 import { profile } from "@/lib/content";
@@ -52,6 +52,15 @@ export function SiteFooter() {
             className="text-muted-fg transition-colors hover:text-foreground"
           >
             <FaLinkedin size={15} />
+          </a>
+          <a
+            href={profile.instagram}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="text-muted-fg transition-colors hover:text-foreground"
+          >
+            <FaInstagram size={15} />
           </a>
         </div>
       </div>
