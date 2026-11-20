@@ -253,7 +253,7 @@ const tr = {
         org: "SASKİ — Sakarya Su ve Kanalizasyon İdaresi",
         period: "Temmuz 2026",
         description:
-          "Sakarya Su ve Kanalizasyon İdaresi'nde zorunlu yaz stajımı tamamladım.",
+          "Zorunlu yaz stajım kapsamında Full-Stack Su ve Fatura Yönetim Sistemi'ni geliştirdim: Fastify ve Prisma ORM ile kurduğum backend servisi üzerinden PostgreSQL veritabanını yöneten, React tabanlı arayüze ve JWT tabanlı kimlik doğrulamaya sahip tam kapsamlı bir sistem.",
       },
     ],
   },
@@ -265,7 +265,7 @@ const tr = {
       {
         title: "Full-Stack Su ve Fatura Yönetim Sistemi",
         description:
-          "Fastify ve Prisma ORM ile geliştirilen backend servisi üzerinden PostgreSQL veritabanı yönetimi sağlayan, React tabanlı arayüze sahip tam kapsamlı su/fatura yönetim sistemi.",
+          "SASKİ'deki zorunlu stajım kapsamında geliştirdiğim; Fastify ve Prisma ORM ile kurulan backend servisi üzerinden PostgreSQL veritabanı yönetimi sağlayan, React tabanlı arayüze sahip tam kapsamlı su/fatura yönetim sistemi.",
       },
       {
         title: "Cloud Native DevOps Pipeline",
@@ -478,7 +478,7 @@ const en: typeof tr = {
         org: "SASKİ — Sakarya Water and Sewerage Administration",
         period: "July 2026",
         description:
-          "I completed my mandatory summer internship at the Sakarya Water and Sewerage Administration.",
+          "During my mandatory summer internship I built the Full-Stack Water & Billing Management System: a complete system with a React-based interface and JWT authentication, managing a PostgreSQL database through a backend service I built with Fastify and Prisma ORM.",
       },
     ],
   },
@@ -490,7 +490,7 @@ const en: typeof tr = {
       {
         title: "Full-Stack Water & Billing Management System",
         description:
-          "A comprehensive water/billing management system with a React-based interface, managing a PostgreSQL database through a backend service built with Fastify and Prisma ORM.",
+          "Built during my mandatory internship at SASKİ: a comprehensive water/billing management system with a React-based interface, managing a PostgreSQL database through a backend service built with Fastify and Prisma ORM.",
       },
       {
         title: "Cloud Native DevOps Pipeline",
