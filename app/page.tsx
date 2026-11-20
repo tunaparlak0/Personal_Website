@@ -1,354 +1,299 @@
-"use client";
+import Image from "next/image";
+import { Mail, MapPin, ExternalLink, Lock } from "lucide-react";
+// lucide-react marka ikonlarini kaldirdi; bunlar react-icons'tan geliyor
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { SiteNav } from "@/components/site-nav";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { Marquee } from "@/components/ui/marquee";
+import { DesignGallery } from "@/components/design-gallery";
+import { ContactForm } from "@/components/contact-form";
+import { CvDownload } from "@/components/cv-download";
+import {
+  profile,
+  skillGroups,
+  experience,
+  education,
+  projects,
+  designs,
+} from "@/lib/content";
 
-// --- İKON KÜTÜPHANELERİ ---
-import {
-  FaUnity,
-  FaJava,
-  FaReact,
-  FaGithub,
-  FaLinkedin,
-  FaUser,
-  FaPaperPlane,
-  FaDocker,
-  FaLock,
-  FaPalette,
-} from "react-icons/fa";
-import {
-  SiPostgresql,
-  SiMysql,
-  SiApachecassandra,
-  SiApachehadoop,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiFlutter,
-  SiDart,
-  SiDotnet,
-  SiPrisma,
-  SiFastify,
-  SiJavascript,
-} from "react-icons/si";
-import { TbMathFunction, TbBrandCSharp } from "react-icons/tb";
-import { HiArrowRight } from "react-icons/hi";
+function Section({
+  id,
+  title,
+  children,
+  delay = 0,
+}: {
+  id: string;
+  title: string;
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  return (
+    <section id={id} className="scroll-mt-20">
+      <BlurFade delay={delay}>
+        <h2 className="mb-5 text-xs font-semibold tracking-[0.14em] text-muted-fg uppercase">
+          {title}
+        </h2>
+      </BlurFade>
+      {children}
+    </section>
+  );
+}
 
 export default function Home() {
-  const socialLinks = {
-    github: "https://github.com/tunaparlak0",
-    linkedin: "https://www.linkedin.com/in/tuna-parlak-276668351/",
-  };
-
-  const skills = [
-    {
-      category: "Backend & DevOps",
-      items: [
-        { name: "Java & Spring Boot", icon: FaJava, color: "text-red-500" },
-        { name: ".NET Core", icon: SiDotnet, color: "text-purple-500" },
-        { name: "Node.js & Fastify", icon: SiFastify, color: "text-white" },
-        { name: "Prisma ORM", icon: SiPrisma, color: "text-teal-400" },
-        { name: "Docker", icon: FaDocker, color: "text-blue-500" },
-        { name: "Git", icon: FaGithub, color: "text-white" },
-      ],
-    },
-    {
-      category: "Veri Mühendisliği (Big Data)",
-      items: [
-        { name: "Apache Kafka", icon: SiApachehadoop, color: "text-white" },
-        {
-          name: "Apache Spark",
-          icon: SiApachehadoop,
-          color: "text-orange-400",
-        },
-        {
-          name: "Cassandra (NoSQL)",
-          icon: SiApachecassandra,
-          color: "text-blue-300",
-        },
-        { name: "HDFS", icon: SiApachehadoop, color: "text-yellow-500" },
-        { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-400" },
-        { name: "MySQL", icon: SiMysql, color: "text-blue-600" },
-      ],
-    },
-    {
-      category: "Oyun & Mobil Geliştirme",
-      items: [
-        { name: "Unity Engine", icon: FaUnity, color: "text-white" },
-        { name: "C#", icon: TbBrandCSharp, color: "text-purple-400" },
-        { name: "Flutter", icon: SiFlutter, color: "text-cyan-400" },
-        { name: "Dart", icon: SiDart, color: "text-blue-400" },
-        {
-          name: "2D Oyun Fiziği",
-          icon: TbMathFunction,
-          color: "text-yellow-400",
-        },
-      ],
-    },
-    {
-      category: "Web Teknolojileri",
-      items: [
-        { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" }, // JavaScript eklendi
-        { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
-        { name: "Next.js", icon: SiNextdotjs, color: "text-white" },
-        { name: "React", icon: FaReact, color: "text-cyan-300" },
-        { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-400" },
-      ],
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Full-Stack Su ve Fatura Yönetim Sistemi",
-      description:
-        "Fastify ve Prisma ORM ile geliştirilen backend servisi ile PostgreSQL veritabanı yönetimi sağlayan; React tabanlı arayüze sahip tam kapsamlı su yönetim sistemi.",
-      tags: ["Fastify", "React", "Prisma", "PostgreSQL", "JavaScript", "JWT"],
-      link: "https://github.com/tunaparlak0/su_sistemi",
-    },
-    {
-      title: "Cloud Native DevOps Pipeline",
-      description:
-        "Spring Boot uygulamasının Dockerize edilerek AWS EC2 ortamına taşındığı, Nginx Reverse Proxy ile yapılandırılmış tam kapsamlı dağıtım mimarisi.",
-      tags: ["AWS", "Docker", "Nginx", "Spring Boot", "MySQL"],
-      link: "https://github.com/tunaparlak0/devops_project_2",
-    },
-    {
-      title: "Social Gaming App (Work in Progress)",
-      description:
-        "Flutter kullanılarak geliştirilen; içerisinde Vampir-Köylü ve Tabu gibi popüler oyunları barındıran, karmaşık oylama mekanizmalarına ve rol dağıtım sistemlerine sahip mobil oyun platformu.",
-      tags: ["Flutter", "Dart", "Mobile Game", "State Management"],
-      link: "https://github.com/tunaparlak0/oyun_kutusu",
-    },
-    {
-      title: "Tedarikçi Değerlendirme Sistemi",
-      description:
-        "Kıvanç bünyesinde ekiple birlikte yürüttüğümüz staj projesi: tedarikçilerin çevresel ve sosyal sorumluluk kriterlerine göre değerlendirildiği kurumsal web uygulaması. Arayüz geliştirme ve yetkilendirme altyapısı benim sorumluluğumdaydı; rol–modül yetki matrisine dayalı RBAC kurarak yetkisiz erişim ve IDOR açıklarını kapattım.",
-      tags: ["Staj Projesi", "React 19", "TypeScript", "RBAC"],
-      link: "",
-    },
-    {
-      title: "Unity 2D Oyun Projesi",
-      description:
-        "C# ve Unity motoru kullanılarak geliştirilen, 2D fizik tabanlı mekanikleri, objeler arası etkileşimleri ve oyun içi arayüzleri test ettiğim tamamlanmamış bir proje.",
-      tags: ["Unity 2D", "C#", "Physics", "OOP"],
-      link: "https://github.com/tunaparlak0/2dUnity",
-    },
-    {
-      title: "Kişisel Portfolyo Sitesi",
-      description:
-        "Next.js 15 ve Tailwind v4 ile geliştirilen, tamamen duyarlı kişisel web sitesi.",
-      tags: ["Next.js", "Tailwind", "React"],
-      link: "https://github.com/tunaparlak0/Personal_Website",
-    },
-  ];
-
-  const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+  const allSkills = skillGroups.flatMap((group) => group.items);
 
   return (
-    <main className="min-h-screen text-white scroll-smooth overflow-x-hidden font-sans relative isolate">
-      {/* --- HERO SECTION --- */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="flex flex-col items-center justify-center min-h-[90vh] p-4 text-center relative z-10"
-      >
-        <div className="space-y-8 max-w-4xl flex flex-col items-center">
-          <div>
-            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
-              Merhaba, Ben{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">
-                Tuna Parlak
-              </span>
-            </h1>
-            <h2 className="text-2xl text-gray-300 font-light mt-4">
-              Sakarya Üniversitesi Yazılım Mühendisliği 4. Sınıf Öğrencisi
-              <span className="block text-lg text-gray-400 mt-1">
-                Sosyal Medya ve Tasarımcı
-              </span>
-            </h2>
-          </div>
+    <>
+      <SiteNav />
 
-          <div className="flex gap-6 justify-center">
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              className="text-gray-400 hover:text-white hover:scale-125 transition-transform duration-300"
-              aria-label="Github"
-            >
-              <FaGithub size={32} />
-            </a>
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              className="text-gray-400 hover:text-blue-400 hover:scale-125 transition-transform duration-300"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin size={32} />
-            </a>
-          </div>
+      <main className="mx-auto max-w-2xl space-y-16 px-6 py-14">
+        {/* HERO */}
+        <section>
+          <BlurFade immediate>
+            <div className="flex items-start justify-between gap-6">
+              <div className="min-w-0">
+                <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  Merhaba, ben{" "}
+                  {/* Emojinin tek basina alt satira dusmemesi icin isimle birlikte tutuyoruz */}
+                  <span className="whitespace-nowrap">{profile.name} 👋</span>
+                </h1>
+                <p className="mt-2 text-sm text-muted-fg">{profile.title}</p>
+              </div>
 
-          <div className="flex flex-wrap gap-4 justify-center mt-4">
-            <Link
-              href="/about"
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white hover:-translate-y-1 group"
-            >
-              <FaUser />
-              Hakkımda
-              <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+              <div className="relative size-24 shrink-0 overflow-hidden rounded-full border border-border-token sm:size-28">
+                <Image
+                  src="/profil.jpg"
+                  alt={profile.name}
+                  fill
+                  sizes="112px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </BlurFade>
 
-            <a
-              href="#projects"
-              className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1"
-            >
-              Projelerimi Gör
-            </a>
+          <BlurFade delay={0.1} immediate>
+            <p className="mt-5 text-[15px] leading-relaxed text-muted-fg">
+              {profile.bio}
+            </p>
+          </BlurFade>
 
-            <Link
-              href="/tasarimlar"
-              className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1"
-            >
-              <FaPalette />
-              Tasarımlarım
-            </Link>
-
-            <Link
-              href="/contact"
-              className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1"
-            >
-              <FaPaperPlane />
-              İletişim
-            </Link>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* --- SKILLS SECTION --- */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="py-20 bg-gray-800/50 relative z-10"
-      >
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-blue-400">
-            Üzerinde Çalıştığım Teknolojiler
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skillGroup, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors shadow-lg group"
+          <BlurFade delay={0.18} immediate>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-2 rounded-lg bg-accent-token px-3.5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
               >
-                <h3 className="text-xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 group-hover:text-blue-400 transition-colors">
-                  {skillGroup.category}
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {skillGroup.items.map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors"
-                    >
-                      <span className={`text-2xl ${item.color}`}>
-                        <item.icon />
-                      </span>
-                      <span className="text-gray-300 font-medium">
-                        {item.name}
-                      </span>
-                    </div>
-                  ))}
+                <Mail size={15} />
+                İletişime geç
+              </a>
+              <CvDownload />
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="inline-flex size-9 items-center justify-center rounded-lg border border-border-token bg-card text-muted-fg transition-colors hover:text-foreground"
+              >
+                <FaGithub size={16} />
+              </a>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex size-9 items-center justify-center rounded-lg border border-border-token bg-card text-muted-fg transition-colors hover:text-foreground"
+              >
+                <FaLinkedin size={16} />
+              </a>
+            </div>
+          </BlurFade>
+        </section>
+
+        {/* HAKKIMDA */}
+        <Section id="hakkimda" title="Hakkımda">
+          <BlurFade delay={0.05}>
+            <div className="space-y-4 text-[15px] leading-relaxed text-muted-fg">
+              <p>
+                Matematiğe ve bilgisayar bilimine duyduğum ilgi beni yazılım
+                geliştirmeye yönlendirdi. Problem çözmekten keyif alıyorum,
+                öğrenmeye açığım ve kendimi sürekli geliştirmeye çalışıyorum.
+              </p>
+              <p>
+                Ders kapsamındaki projelerin dışında mobil uygulama ve Unity ile
+                oyun geliştirmeyle ilgileniyor, yeni teknolojileri keşfediyorum.
+                Hazırlık sınıfında aldığım dersler ve bölümümün İngilizce olması
+                sayesinde araştırma yaparken farklı kaynaklardan
+                faydalanabiliyorum.
+              </p>
+              <p className="flex items-center gap-2 text-sm">
+                <MapPin size={14} className="shrink-0" />
+                {profile.location}
+              </p>
+            </div>
+          </BlurFade>
+        </Section>
+
+        {/* DENEYİM */}
+        <Section id="deneyim" title="Deneyim">
+          <div className="space-y-5">
+            {experience.map((item, i) => (
+              <BlurFade key={item.org} delay={0.05 + i * 0.06}>
+                <div className="rounded-xl border border-border-token bg-card p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                    <h3 className="text-sm font-semibold">{item.role}</h3>
+                    <span className="text-xs text-muted-fg">
+                      {item.period}
+                    </span>
+                  </div>
+                  <p className="mt-0.5 text-sm text-accent-token">{item.org}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-fg">
+                    {item.description}
+                  </p>
                 </div>
-              </motion.div>
+              </BlurFade>
             ))}
           </div>
-        </div>
-      </motion.section>
+        </Section>
 
-      {/* --- PROJECTS SECTION --- */}
-      <motion.section
-        id="projects"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="py-20 bg-gray-900/10 relative z-10"
-      >
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-blue-400">
-            Seçilmiş Projeler
-          </h2>
+        {/* EĞİTİM */}
+        <Section id="egitim" title="Eğitim">
+          <div className="space-y-3">
+            {education.map((item, i) => (
+              <BlurFade key={item.school} delay={0.05 + i * 0.06}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-border-token pb-3">
+                  <div>
+                    <h3 className="text-sm font-semibold">{item.school}</h3>
+                    <p className="mt-0.5 text-sm text-muted-fg">
+                      {item.program}
+                    </p>
+                  </div>
+                  <span className="text-xs text-muted-fg">{item.period}</span>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+        </Section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {projects.map((project, index) => (
-              /* Sabit yukseklikli yuva: kart hover'da buyurken diger kartlari itmesin */
-              <div key={index} className="relative md:h-80 lg:h-70">
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className="group relative md:absolute md:inset-x-0 md:top-0 md:min-h-full bg-gray-800/80 hover:bg-gray-800 backdrop-blur-sm rounded-xl shadow-xl flex flex-col border border-gray-700 hover:border-blue-500/50 hover:shadow-blue-500/10 hover:z-20 transition-colors"
-                >
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm mb-4 md:line-clamp-3 md:group-hover:line-clamp-none">
+        {/* TEKNOLOJİLER */}
+        <Section id="teknolojiler" title="Teknolojiler">
+          <BlurFade delay={0.05}>
+            <div className="space-y-2.5">
+              <Marquee duration={40}>
+                {allSkills.slice(0, Math.ceil(allSkills.length / 2)).map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-lg border border-border-token bg-card px-3 py-1.5 text-xs whitespace-nowrap text-muted-fg"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </Marquee>
+              <Marquee duration={40} reverse>
+                {allSkills.slice(Math.ceil(allSkills.length / 2)).map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-lg border border-border-token bg-card px-3 py-1.5 text-xs whitespace-nowrap text-muted-fg"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </Marquee>
+            </div>
+          </BlurFade>
+        </Section>
+
+        {/* PROJELER */}
+        <Section id="projeler" title="Projeler">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {projects.map((project, i) => (
+              <BlurFade key={project.title} delay={0.05 + (i % 2) * 0.06}>
+                <div className="flex h-full flex-col rounded-xl border border-border-token bg-card p-4 transition-colors hover:border-accent-token/50">
+                  <h3 className="text-sm font-semibold">{project.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-fg">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, i) => (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
                       <span
-                        key={i}
-                        className="text-xs font-medium px-2 py-1 bg-blue-900/30 text-blue-300 rounded"
+                        key={tag}
+                        className="rounded bg-accent-soft px-1.5 py-0.5 text-[11px] text-accent-token"
                       >
-                        #{tag}
+                        {tag}
                       </span>
                     ))}
                   </div>
 
-                  {project.link ? (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      className="mt-auto flex items-center justify-center gap-2 w-full py-3 bg-gray-700 hover:bg-blue-600 rounded-lg text-white font-medium transition-colors"
-                    >
-                      <FaGithub />
-                      GitHub&apos;da İncele
-                    </a>
-                  ) : (
-                    <div className="mt-auto flex items-center justify-center gap-2 w-full py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-gray-400 text-sm font-medium">
-                      <FaLock />
-                      Kurumsal proje — kaynak kodu özel
-                    </div>
-                  )}
+                  <div className="mt-4">
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground hover:text-accent-token transition-colors"
+                      >
+                        <FaGithub size={13} />
+                        Kaynak kodu
+                        <ExternalLink size={11} />
+                      </a>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 text-xs text-muted-fg">
+                        <Lock size={12} />
+                        Kurumsal proje — kaynak kodu özel
+                      </span>
+                    )}
+                  </div>
                 </div>
-                </motion.div>
-              </div>
+              </BlurFade>
             ))}
           </div>
-        </div>
-      </motion.section>
+        </Section>
 
-      <footer className="py-8 text-center text-gray-500 text-sm border-t border-gray-800 bg-gray-900/50 relative z-10">
-        <p className="mb-2">
-          © {new Date().getFullYear()} Tuna Parlak | Yazılım Mühendisi
-        </p>
-        <p className="text-xs text-gray-600">
-          Bu site Next.js 15, Tailwind CSS ve Framer Motion teknolojileri ile
-          geliştirilmiştir.
-        </p>
+        {/* TASARIM */}
+        <Section id="tasarim" title="Tasarım">
+          <BlurFade delay={0.05}>
+            <p className="mb-5 text-[15px] leading-relaxed text-muted-fg">
+              GDG on Campus Sakarya Üniversitesi topluluğunda tasarım ve sosyal
+              medya ekibindeyim. Aşağıdaki etkinlik afişleri, sosyal medya
+              görselleri ve basılı materyaller bu kapsamda hazırladığım
+              çalışmalardan bir seçki. Büyütmek için üzerlerine tıklayın.
+            </p>
+          </BlurFade>
+          <BlurFade delay={0.1}>
+            <DesignGallery designs={designs} />
+          </BlurFade>
+        </Section>
+
+        {/* İLETİŞİM */}
+        <Section id="iletisim" title="İletişim">
+          <BlurFade delay={0.05}>
+            <p className="mb-5 text-[15px] leading-relaxed text-muted-fg">
+              İş/staj, proje teklifleri veya geri dönüşler için aşağıdaki formu
+              doldurabilir ya da doğrudan{" "}
+              <a
+                href={`mailto:${profile.email}`}
+                className="text-accent-token underline underline-offset-4"
+              >
+                {profile.email}
+              </a>{" "}
+              adresine yazabilirsiniz.
+            </p>
+          </BlurFade>
+          <BlurFade delay={0.1}>
+            <ContactForm />
+          </BlurFade>
+        </Section>
+      </main>
+
+      <footer className="border-t border-border-token">
+        <div className="mx-auto max-w-2xl px-6 py-6 text-xs text-muted-fg">
+          © {new Date().getFullYear()} {profile.name}
+        </div>
       </footer>
-    </main>
+    </>
   );
 }

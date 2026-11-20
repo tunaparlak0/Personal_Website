@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// 👇 ParticlesBackground'u buraya import ediyoruz
-import ParticlesBackground from "../components/ParticlesBackground";
+import { ThemeProvider } from "@/components/theme-provider";
+import { DotPattern } from "@/components/ui/dot-pattern";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
   title: "Tuna Parlak | Yazılım Mühendisi",
-  description: "Tuna Parlak kişisel portfolyo.",
+  description:
+    "Sakarya Üniversitesi Yazılım Mühendisliği öğrencisi; backend, bulut ve arayüz projeleri ile GDG on Campus tasarım çalışmaları.",
 };
 
 export default function RootLayout({
@@ -17,17 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      {/* 👇 1. ARKA PLAN RENGİNİ VE YAZI RENGİNİ BURADA TANIMLIYORUZ */}
-      <body className={`${inter.className} bg-gray-900 text-white`}>
-        
-        {/* 👇 2. EFEKTİ TÜM SAYFALARIN ARKASINA SABİTLEYECEK BİLEŞEN */}
-        <ParticlesBackground />
-        
-        {/* 👇 3. İÇERİKLERİN EFEKTİN ÜSTÜNDE DURMASI İÇİN relative VE z-10 EKLİYORUZ */}
-        <div className="relative z-10">
-            {children}
-        </div>
+    // suppressHydrationWarning: next-themes tema sinifini html'e istemcide ekler
+    <html lang="tr" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider>
+          <DotPattern />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
