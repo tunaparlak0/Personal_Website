@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LocaleProvider } from "@/components/locale-provider";
 import { DotPattern } from "@/components/ui/dot-pattern";
+import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site-footer";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
@@ -18,12 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // suppressHydrationWarning: next-themes tema sinifini html'e istemcide ekler
+    // suppressHydrationWarning: tema sinifi ve dil istemcide ayarlaniyor
     <html lang="tr" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} flex min-h-screen flex-col antialiased`}>
         <ThemeProvider>
-          <DotPattern />
-          {children}
+          <LocaleProvider>
+            <DotPattern />
+            <SiteNav />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

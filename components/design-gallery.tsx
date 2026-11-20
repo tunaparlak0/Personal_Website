@@ -4,19 +4,22 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import type { Design } from "@/lib/content";
+
+import { useLocale } from "@/components/locale-provider";
+import { designAssets } from "@/lib/content";
 
 /**
  * Masonry galeri + buyutec.
  * Tasarimlarin en/boy oranlari cok farkli oldugu icin sabit kart yerine
  * CSS columns kullaniyoruz; her gorsel kendi oraninda duruyor.
  */
-export function DesignGallery({ designs }: { designs: Design[] }) {
-  const [selected, setSelected] = useState<Design | null>(null);
+export function DesignGallery() {
+  const { t } = useLocale();
+  const [selected, setSelected] = useState<number | null>(null);
   const close = useCallback(() => setSelected(null), []);
 
   useEffect(() => {
-    if (!selected) return;
+    if (selected === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
@@ -28,45 +31,53 @@ export function DesignGallery({ designs }: { designs: Design[] }) {
     };
   }, [selected, close]);
 
+  const active = selected === null ? null : designAssets[selected];
+  const activeMeta = selected === null ? null : t.designs.items[selected];
+
   return (
     <>
-      <div className="columns-1 gap-4 sm:columns-2">
-        {designs.map((design) => (
-          <button
-            key={design.src}
-            type="button"
-            onClick={() => setSelected(design)}
-            className="group mb-4 block w-full break-inside-avoid cursor-zoom-in overflow-hidden rounded-xl border border-border-token bg-card text-left transition-colors hover:border-accent-token/50"
-          >
-            <Image
-              src={design.src}
-              alt={design.title}
-              width={design.width}
-              height={design.height}
-              sizes="(max-width: 640px) 100vw, 320px"
-              className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-            <div className="p-3">
-              <h3 className="text-sm font-medium text-foreground">
-                {design.title}
-              </h3>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {design.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded bg-accent-soft px-1.5 py-0.5 text-[11px] text-accent-token"
-                  >
-                    {tag}
-                  </span>
-                ))}
+      <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+        {designAssets.map((asset, i) => {
+          const meta = t.designs.items[i];
+
+          return (
+            <button
+              key={asset.src}
+              type="button"
+              onClick={() => setSelected(i)}
+              className="group mb-5 block w-full cursor-zoom-in break-inside-avoid overflow-hidden rounded-2xl border border-border-token bg-card text-left transition-colors hover:border-accent-token/50"
+            >
+              <Image
+                src={asset.src}
+                alt={meta.title}
+                width={asset.width}
+                height={asset.height}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+              <div className="p-4">
+                <h2 className="text-sm font-semibold">{meta.title}</h2>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-fg">
+                  {meta.description}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {meta.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded bg-accent-soft px-2 py-0.5 text-[11px] text-accent-token"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
 
       <AnimatePresence>
-        {selected && (
+        {active && activeMeta && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -75,7 +86,7 @@ export function DesignGallery({ designs }: { designs: Design[] }) {
             onClick={close}
             role="dialog"
             aria-modal="true"
-            aria-label={selected.title}
+            aria-label={activeMeta.title}
             className="fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
           >
             <button
@@ -96,15 +107,15 @@ export function DesignGallery({ designs }: { designs: Design[] }) {
               className="flex max-h-full w-full max-w-5xl cursor-default flex-col items-center"
             >
               <Image
-                src={selected.src}
-                alt={selected.title}
-                width={selected.width}
-                height={selected.height}
+                src={active.src}
+                alt={activeMeta.title}
+                width={active.width}
+                height={active.height}
                 sizes="100vw"
                 className="h-auto max-h-[78vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
               />
               <p className="mt-4 text-center text-sm text-zinc-300">
-                {selected.title}
+                {activeMeta.title}
               </p>
             </motion.div>
           </motion.div>

@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
-// Icerik tek sayfa akisina tasindi; eski baglantilar bozulmasin diye
-// ilgili bolume yonlendiriyoruz.
+// Eski baglantilar bozulmasin diye yeni sayfaya yonlendiriyoruz.
 export default function Page() {
-  redirect("/#hakkimda");
+  redirect("/hakkimda");
 }

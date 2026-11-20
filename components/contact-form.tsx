@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTheme } from "next-themes";
 import { Check, Loader2, Send, X } from "lucide-react";
+import { useLocale } from "@/components/locale-provider";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -13,6 +14,7 @@ export function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
   const { resolvedTheme } = useTheme();
+  const { t } = useLocale();
 
   function resetCaptcha() {
     setCaptchaToken(null);
@@ -67,7 +69,7 @@ export function ContactForm() {
             htmlFor="name"
             className="mb-1.5 block text-xs font-medium text-muted-fg"
           >
-            İsim
+            {t.contact.name}
           </label>
           <input
             type="text"
@@ -76,7 +78,7 @@ export function ContactForm() {
             required
             disabled={disabled}
             className={fieldClass}
-            placeholder="Adınız Soyadınız"
+            placeholder={t.contact.namePlaceholder}
           />
         </div>
 
@@ -85,7 +87,7 @@ export function ContactForm() {
             htmlFor="email"
             className="mb-1.5 block text-xs font-medium text-muted-fg"
           >
-            E-posta
+            {t.contact.email}
           </label>
           <input
             type="email"
@@ -104,7 +106,7 @@ export function ContactForm() {
           htmlFor="message"
           className="mb-1.5 block text-xs font-medium text-muted-fg"
         >
-          Mesajınız
+          {t.contact.message}
         </label>
         <textarea
           name="message"
@@ -113,7 +115,7 @@ export function ContactForm() {
           required
           disabled={disabled}
           className={`${fieldClass} resize-none`}
-          placeholder="Mesajınızı buraya yazın..."
+          placeholder={t.contact.messagePlaceholder}
         />
       </div>
 
@@ -129,8 +131,7 @@ export function ContactForm() {
           />
         ) : (
           <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-500">
-            reCAPTCHA yapılandırılmamış: NEXT_PUBLIC_RECAPTCHA_SITE_KEY tanımlı
-            değil.
+            {t.contact.captchaMissing}
           </p>
         )}
       </div>
@@ -142,30 +143,29 @@ export function ContactForm() {
       >
         {formStatus === "loading" && (
           <>
-            <Loader2 size={16} className="animate-spin" /> Gönderiliyor...
+            <Loader2 size={16} className="animate-spin" /> {t.contact.sending}
           </>
         )}
         {formStatus === "idle" && (
           <>
-            <Send size={16} /> Gönder
+            <Send size={16} /> {t.contact.send}
           </>
         )}
         {formStatus === "success" && (
           <>
-            <Check size={16} /> Mesaj gönderildi
+            <Check size={16} /> {t.contact.sent}
           </>
         )}
         {formStatus === "error" && (
           <>
-            <X size={16} /> Hata, tekrar dene
+            <X size={16} /> {t.contact.errorButton}
           </>
         )}
       </button>
 
       {formStatus === "error" && (
         <p className="text-sm text-red-500">
-          Mesaj gönderilemedi. Doğrulamayı tekrarlayıp yeniden deneyebilir ya da
-          doğrudan e-posta yazabilirsiniz.
+          {t.contact.errorText}
         </p>
       )}
     </form>

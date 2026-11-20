@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Download } from "lucide-react";
+import { useLocale } from "@/components/locale-provider";
 
 /** CV butonu: once hangi dilde indirilecegini sorar. */
 export function CvDownload() {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -36,10 +38,10 @@ export function CvDownload() {
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border-token bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent-token/50"
+        className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-border-token bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent-token/50"
       >
         <Download size={15} />
-        CV indir
+        {t.common.downloadCv}
       </button>
 
       {open && (
@@ -48,7 +50,7 @@ export function CvDownload() {
           className="absolute top-full left-0 z-30 mt-2 w-44 overflow-hidden rounded-lg border border-border-token bg-card shadow-lg"
         >
           <p className="border-b border-border-token px-3 py-2 text-xs text-muted-fg">
-            Hangi dilde?
+            {t.common.whichLanguage}
           </p>
           <a
             role="menuitem"
@@ -57,7 +59,7 @@ export function CvDownload() {
             onClick={() => setOpen(false)}
             className={itemClass}
           >
-            Türkçe
+            {t.common.turkish}
           </a>
           <a
             role="menuitem"
@@ -66,7 +68,7 @@ export function CvDownload() {
             onClick={() => setOpen(false)}
             className={itemClass}
           >
-            English
+            {t.common.english}
           </a>
         </div>
       )}
