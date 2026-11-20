@@ -14,6 +14,7 @@ import {
   FaPaperPlane,
   FaDocker,
   FaLock,
+  FaPalette,
 } from "react-icons/fa";
 import {
   SiPostgresql,
@@ -170,6 +171,9 @@ export default function Home() {
             </h1>
             <h2 className="text-2xl text-gray-300 font-light mt-4">
               Sakarya Üniversitesi Yazılım Mühendisliği 4. Sınıf Öğrencisi
+              <span className="block text-lg text-gray-400 mt-1">
+                Sosyal Medya ve Tasarımcı
+              </span>
             </h2>
           </div>
 
@@ -208,6 +212,14 @@ export default function Home() {
             >
               Projelerimi Gör
             </a>
+
+            <Link
+              href="/tasarimlar"
+              className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-all shadow-lg flex items-center gap-2 text-white border border-gray-700 hover:-translate-y-1"
+            >
+              <FaPalette />
+              Tasarımlarım
+            </Link>
 
             <Link
               href="/contact"
