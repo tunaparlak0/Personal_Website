@@ -19,11 +19,11 @@ type Design = {
 export default function TasarimlarPage() {
   const designs: Design[] = [
     {
-      src: "/tasarimlar/gdg-kapak.png",
-      title: "GDG on Campus SAÜ — Ekip Tanıtım Kapağı",
+      src: "/tasarimlar/gdg-yaka-karti.png",
+      title: "GDG on Campus SAÜ — Yaka Kartı",
       description:
-        "Topluluk ekibini tanıtan sosyal medya serisi için hazırladığım kapak tasarımı.",
-      tags: ["Sosyal Medya", "Kapak"],
+        "Topluluk ekibi için tasarladığım, etkinliklerde kullanılan yaka kartı; isim ve görev alanı her ekip üyesine göre değiştiriliyor.",
+      tags: ["Yaka Kartı", "Basılı", "Kurumsal Kimlik"],
       width: 945,
       height: 1417,
     },
@@ -35,15 +35,6 @@ export default function TasarimlarPage() {
       tags: ["Etkinlik", "Banner"],
       width: 2000,
       height: 1000,
-    },
-    {
-      src: "/tasarimlar/solution-challenge-belge.webp",
-      title: "Solution Challenge — Katılım Belgesi",
-      description:
-        "Kampüs yaşamındaki sorunlara çözüm temalı hackathon için tasarladığım katılım sertifikası.",
-      tags: ["Sertifika", "Hackathon"],
-      width: 2000,
-      height: 1414,
     },
     {
       src: "/tasarimlar/kulup-tanitim-haftasi.webp",
