@@ -46,13 +46,11 @@ export const techStack: Tech[] = [
   { name: "AWS EC2" },
   { name: "Nginx", logo: "nginx" },
   { name: "Linux", logo: "linux" },
-  { name: "Git", logo: "git" },
   { name: "GitHub", logo: "github" },
   { name: "Postman", logo: "postman" },
   { name: "Flutter", logo: "flutter" },
   { name: "Dart", logo: "dart" },
   { name: "Unity", logo: "unity" },
-  { name: "Figma", logo: "figma" },
 ];
 
 export type SkillCategory = { id: string; items: Tech[] };
@@ -69,7 +67,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Docker", logo: "docker" },
       { name: "Nginx", logo: "nginx" },
       { name: "AWS EC2" },
-      { name: "Git", logo: "git" },
+      { name: "GitHub", logo: "github" },
     ],
   },
   {
@@ -103,7 +101,6 @@ export const skillCategories: SkillCategory[] = [
       { name: "React", logo: "react" },
       { name: "Tailwind CSS", logo: "tailwindcss" },
       { name: "Vite", logo: "vite" },
-      { name: "Figma", logo: "figma" },
     ],
   },
 ];
@@ -178,7 +175,7 @@ const tr = {
     techSubtitle: "Projelerimde kullandığım araçlar ve teknolojiler.",
     designTitle: "Tasarımlarım",
     designSubtitle:
-      "GDG on Campus Sakarya Üniversitesi için hazırladığım etkinlik afişleri ve sosyal medya görselleri.",
+      "GDG on Campus Sakarya Üniversitesi için Canva ile hazırladığım etkinlik afişleri ve sosyal medya görselleri.",
     cards: {
       about: {
         title: "Hakkımda",
@@ -300,7 +297,7 @@ const tr = {
   designs: {
     title: "Tasarım",
     subtitle:
-      "GDG on Campus Sakarya Üniversitesi topluluğunda tasarım ve sosyal medya ekibindeyim. Aşağıdakiler bu kapsamda hazırladığım çalışmalardan bir seçki.",
+      "GDG on Campus Sakarya Üniversitesi topluluğunda tasarım ve sosyal medya ekibindeyim. Aşağıdakiler, Canva kullanarak hazırladığım çalışmalardan bir seçki.",
     items: [
       {
         title: "GDG on Campus SAÜ — Yaka Kartı",
@@ -359,6 +356,7 @@ const tr = {
     name: "İsim",
     namePlaceholder: "Adınız Soyadınız",
     email: "E-posta",
+    emailPlaceholder: "ornek@mail.com",
     message: "Mesajınız",
     messagePlaceholder: "Mesajınızı buraya yazın...",
     send: "Gönder",
@@ -402,7 +400,7 @@ const en: typeof tr = {
     techSubtitle: "Tools and technologies I use in my projects.",
     designTitle: "My Designs",
     designSubtitle:
-      "Event posters and social media visuals I created for GDG on Campus Sakarya University.",
+      "Event posters and social media visuals I created with Canva for GDG on Campus Sakarya University.",
     cards: {
       about: {
         title: "About",
@@ -524,7 +522,7 @@ const en: typeof tr = {
   designs: {
     title: "Design",
     subtitle:
-      "I am part of the design and social media team at GDG on Campus Sakarya University. Below is a selection of the work I created there.",
+      "I am part of the design and social media team at GDG on Campus Sakarya University. Below is a selection of the work I created there using Canva.",
     items: [
       {
         title: "GDG on Campus SAU — Name Badge",
@@ -583,6 +581,7 @@ const en: typeof tr = {
     name: "Name",
     namePlaceholder: "Your full name",
     email: "Email",
+    emailPlaceholder: "example@mail.com",
     message: "Your message",
     messagePlaceholder: "Write your message here...",
     send: "Send",

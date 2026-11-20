@@ -96,7 +96,7 @@ export function ContactForm() {
             required
             disabled={disabled}
             className={fieldClass}
-            placeholder="ornek@mail.com"
+            placeholder={t.contact.emailPlaceholder}
           />
         </div>
       </div>
