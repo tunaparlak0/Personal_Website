@@ -1,1 +1,78 @@
 @import "tailwindcss";
+
+/* Koyu tema, class ile kontrol ediliyor (next-themes attribute="class") */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --muted: #71717a;
+  --card: #ffffff;
+  --border: #e4e4e7;
+  --accent: #2563eb;
+  --accent-soft: #eff6ff;
+  --pattern: #d4d4d8;
+}
+
+.dark {
+  --background: #0a0a0b;
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
+  --card: #141417;
+  --border: #27272a;
+  --accent: #60a5fa;
+  --accent-soft: #172554;
+  --pattern: #27272a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-fg: var(--muted);
+  --color-card: var(--card);
+  --color-border-token: var(--border);
+  --color-accent-token: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-pattern: var(--pattern);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Tema degisiminde ani renk sicramasini yumusatir */
+html.theme-ready body,
+html.theme-ready body * {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready body,
+  html.theme-ready body * {
+    transition: none;
+  }
+}
+
+/* Marquee animasyonlari — iki kopya yan yana oldugu icin -50% tam bir tur eder */
+/* Her kopya kendi genisligi kadar kayar; sonraki kopya tam yerine gecer. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse linear infinite;
+}
