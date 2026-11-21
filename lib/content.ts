@@ -6,6 +6,8 @@ export const locales: Locale[] = ["tr", "en"];
 /* Dilden bagimsiz veriler                                           */
 /* ---------------------------------------------------------------- */
 
+export const siteUrl = "https://tunaparlak.site";
+
 export const profile = {
   name: "Tuna Parlak",
   location: "Sakarya / Adana, Türkiye",
