@@ -7,9 +7,11 @@ import { Check, Loader2, Send, X } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 
 type Status = "idle" | "loading" | "success" | "error";
+type ErrorKind = "generic" | "captcha" | "server";
 
 export function ContactForm() {
   const [formStatus, setFormStatus] = useState<Status>("idle");
+  const [errorKind, setErrorKind] = useState<ErrorKind>("generic");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
@@ -55,10 +57,19 @@ export function ContactForm() {
         setFormStatus("success");
         form.reset();
       } else {
+        // 400: captcha reddedildi, 5xx: sunucu/e-posta servisi sorunu
+        setErrorKind(response.status === 400 ? "captcha" : "server");
         setFormStatus("error");
+        console.error(
+          "İletişim formu hatası:",
+          response.status,
+          await response.text(),
+        );
       }
-    } catch {
+    } catch (err) {
+      setErrorKind("generic");
       setFormStatus("error");
+      console.error("İletişim formu ağ hatası:", err);
     } finally {
       resetCaptcha();
     }
@@ -173,7 +184,11 @@ export function ContactForm() {
 
       {formStatus === "error" && (
         <p className="text-sm text-red-500">
-          {t.contact.errorText}
+          {errorKind === "captcha"
+            ? t.contact.errorCaptcha
+            : errorKind === "server"
+              ? t.contact.errorServer
+              : t.contact.errorText}
         </p>
       )}
     </form>

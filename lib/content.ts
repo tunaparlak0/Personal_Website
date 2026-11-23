@@ -367,6 +367,10 @@ const tr = {
     errorButton: "Hata, tekrar dene",
     errorText:
       "Mesaj gönderilemedi. Doğrulamayı tekrarlayıp yeniden deneyebilir ya da doğrudan e-posta yazabilirsiniz.",
+    errorCaptcha:
+      "Doğrulama geçersiz oldu. Lütfen kutuyu tekrar işaretleyip yeniden gönderin.",
+    errorServer:
+      "Mesaj şu anda iletilemiyor (sunucu kaynaklı). Doğrudan e-posta yazabilirsiniz.",
     captchaMissing:
       "reCAPTCHA yapılandırılmamış: NEXT_PUBLIC_RECAPTCHA_SITE_KEY tanımlı değil.",
   },
@@ -592,6 +596,10 @@ const en: typeof tr = {
     errorButton: "Failed, try again",
     errorText:
       "The message could not be sent. Please complete the verification and try again, or email me directly.",
+    errorCaptcha:
+      "The verification expired. Please tick the box again and resend.",
+    errorServer:
+      "The message cannot be delivered right now (server side). Please email me directly.",
     captchaMissing:
       "reCAPTCHA is not configured: NEXT_PUBLIC_RECAPTCHA_SITE_KEY is missing.",
   },
