@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTheme } from "next-themes";
 import { Check, Loader2, Send, X } from "lucide-react";
@@ -20,6 +20,14 @@ export function ContactForm() {
     setCaptchaToken(null);
     recaptchaRef.current?.reset();
   }
+
+  // Gonderim bitince form bir sure sonra tekrar kullanilabilir hale gelsin;
+  // aksi halde buton "Mesaj gönderildi" halinde kilitli kaliyor.
+  useEffect(() => {
+    if (formStatus !== "success" && formStatus !== "error") return;
+    const id = window.setTimeout(() => setFormStatus("idle"), 5000);
+    return () => window.clearTimeout(id);
+  }, [formStatus]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
