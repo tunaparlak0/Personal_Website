@@ -15,7 +15,7 @@ export default function ProjectsPage() {
     <PageShell>
       <PageHeader title={t.projects.title} subtitle={t.projects.subtitle} />
 
-      <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-12 gap-5 columns-1 md:columns-2 xl:columns-3">
         {t.projects.items.map((project, i) => {
           const { link, tags, ongoing, privateReason } = projectMeta[i];
 
@@ -23,10 +23,12 @@ export default function ProjectsPage() {
             <BlurFade
               key={project.title}
               delay={(i % 3) * 0.06}
-              /* Sabit yukseklikli yuva: kart hover'da buyurken digerlerini itmesin */
-              className="relative hover:z-20 md:h-70"
+              className="mb-5 break-inside-avoid"
             >
-              <article className="group relative flex flex-col rounded-2xl border border-border-token bg-card p-5 transition-colors hover:border-accent-token/50 hover:bg-card md:absolute md:inset-x-0 md:top-0 md:min-h-full">
+              <article
+                className="group flex flex-col rounded-2xl border border-border-token bg-card p-5 transition-colors hover:border-accent-token/50 md:h-70 md:hover:h-auto"
+                /* Kartlar sabit yukseklikte durur, hover'da icerige gore acilir */
+              >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <h2 className="line-clamp-2 text-base font-semibold">
                     {project.title}
