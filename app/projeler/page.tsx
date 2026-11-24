@@ -20,17 +20,24 @@ export default function ProjectsPage() {
           const { link, tags, ongoing, privateReason } = projectMeta[i];
 
           return (
-            <BlurFade key={project.title} delay={(i % 3) * 0.06}>
-              <article className="flex h-full flex-col rounded-2xl border border-border-token bg-card p-5 transition-colors hover:border-accent-token/50">
+            <BlurFade
+              key={project.title}
+              delay={(i % 3) * 0.06}
+              /* Sabit yukseklikli yuva: kart hover'da buyurken digerlerini itmesin */
+              className="relative hover:z-20 md:h-70"
+            >
+              <article className="group relative flex flex-col rounded-2xl border border-border-token bg-card p-5 transition-colors hover:border-accent-token/50 hover:bg-card md:absolute md:inset-x-0 md:top-0 md:min-h-full">
                 <div className="flex flex-wrap items-start justify-between gap-2">
-                  <h2 className="text-base font-semibold">{project.title}</h2>
+                  <h2 className="line-clamp-2 text-base font-semibold">
+                    {project.title}
+                  </h2>
                   {ongoing && (
                     <span className="shrink-0 rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-token">
                       {t.common.ongoing}
                     </span>
                   )}
                 </div>
-                <p className="mt-2.5 flex-1 text-sm leading-relaxed text-muted-fg">
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-fg md:line-clamp-3 md:group-hover:line-clamp-none">
                   {project.description}
                 </p>
 
@@ -45,7 +52,7 @@ export default function ProjectsPage() {
                   ))}
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-5 md:mt-auto md:pt-5">
                   {link ? (
                     <a
                       href={link}

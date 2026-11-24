@@ -139,13 +139,13 @@ export type ProjectMeta = {
 export const projectMeta: ProjectMeta[] = [
   {
     link: "",
-    tags: ["Python", "Pandas", "NLP", "MSR", "İstatistik"],
+    tags: ["Python", "Pandas", "NLP", "İstatistik"],
     ongoing: true,
     privateReason: "research",
   },
   {
     link: "https://github.com/tunaparlak0/moving-object-detection",
-    tags: ["Python", "OpenCV", "Optical Flow", "Homography", "Kalman"],
+    tags: ["Python", "OpenCV", "Optical Flow", "Kalman"],
     ongoing: true,
   },
   {
