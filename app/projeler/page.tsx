@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import { PageHeader, PageShell } from "@/components/page-header";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { useLocale } from "@/components/locale-provider";
-import { projectLinks, projectTags } from "@/lib/content";
+import { projectMeta } from "@/lib/content";
 
 export default function ProjectsPage() {
   const { t } = useLocale();
@@ -17,13 +17,19 @@ export default function ProjectsPage() {
 
       <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {t.projects.items.map((project, i) => {
-          const link = projectLinks[i];
-          const tags = projectTags[i];
+          const { link, tags, ongoing, privateReason } = projectMeta[i];
 
           return (
             <BlurFade key={project.title} delay={(i % 3) * 0.06}>
               <article className="flex h-full flex-col rounded-2xl border border-border-token bg-card p-5 transition-colors hover:border-accent-token/50">
-                <h2 className="text-base font-semibold">{project.title}</h2>
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <h2 className="text-base font-semibold">{project.title}</h2>
+                  {ongoing && (
+                    <span className="shrink-0 rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-token">
+                      {t.common.ongoing}
+                    </span>
+                  )}
+                </div>
                 <p className="mt-2.5 flex-1 text-sm leading-relaxed text-muted-fg">
                   {project.description}
                 </p>
@@ -54,7 +60,9 @@ export default function ProjectsPage() {
                   ) : (
                     <span className="inline-flex items-center gap-1.5 text-xs text-muted-fg">
                       <Lock size={12} />
-                      {t.common.privateSource}
+                      {privateReason === "research"
+                        ? t.common.privateResearch
+                        : t.common.privateSource}
                     </span>
                   )}
                 </div>

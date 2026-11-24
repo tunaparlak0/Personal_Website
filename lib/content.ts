@@ -125,22 +125,54 @@ export const designAssets: Design[] = [
   { src: "/tasarimlar/uiux-workshop-afis.webp", width: 1414, height: 2000 },
 ];
 
-export const projectLinks = [
-  "https://github.com/tunaparlak0/su_sistemi",
-  "https://github.com/tunaparlak0/devops_project_2",
-  "",
-  "https://github.com/tunaparlak0/oyun_kutusu",
-  "https://github.com/tunaparlak0/2dUnity",
-  "https://github.com/tunaparlak0/Personal_Website",
-];
+export type ProjectMeta = {
+  /** Bos string: kaynak kodu herkese acik degil */
+  link: string;
+  tags: string[];
+  /** Halen uzerinde calisilan projeler rozetle isaretlenir */
+  ongoing?: boolean;
+  /** link bosken hangi aciklamanin gosterilecegi */
+  privateReason?: "corporate" | "research";
+};
 
-export const projectTags = [
-  ["Fastify", "React", "Prisma", "PostgreSQL", "JWT"],
-  ["AWS", "Docker", "Nginx", "Spring Boot", "MySQL"],
-  ["React 19", "TypeScript", "Vite", "PostgreSQL", "RBAC"],
-  ["Flutter", "Dart", "State Management"],
-  ["Unity 2D", "C#", "OOP"],
-  ["Next.js", "Tailwind", "React"],
+/** Sirasi dictionaries[*].projects.items ile birebir ayni olmali. */
+export const projectMeta: ProjectMeta[] = [
+  {
+    link: "",
+    tags: ["Python", "Pandas", "NLP", "MSR", "İstatistik"],
+    ongoing: true,
+    privateReason: "research",
+  },
+  {
+    link: "https://github.com/tunaparlak0/moving-object-detection",
+    tags: ["Python", "OpenCV", "Optical Flow", "Homography", "Kalman"],
+    ongoing: true,
+  },
+  {
+    link: "https://github.com/tunaparlak0/su_sistemi",
+    tags: ["Fastify", "React", "Prisma", "PostgreSQL", "JWT"],
+  },
+  {
+    link: "https://github.com/tunaparlak0/devops_project_2",
+    tags: ["AWS", "Docker", "Nginx", "Spring Boot", "MySQL"],
+  },
+  {
+    link: "",
+    tags: ["React 19", "TypeScript", "Vite", "PostgreSQL", "RBAC"],
+    privateReason: "corporate",
+  },
+  {
+    link: "https://github.com/tunaparlak0/oyun_kutusu",
+    tags: ["Flutter", "Dart", "State Management"],
+  },
+  {
+    link: "https://github.com/tunaparlak0/2dUnity",
+    tags: ["Unity 2D", "C#", "OOP"],
+  },
+  {
+    link: "https://github.com/tunaparlak0/Personal_Website",
+    tags: ["Next.js", "Tailwind", "React"],
+  },
 ];
 
 /* ---------------------------------------------------------------- */
@@ -165,6 +197,8 @@ const tr = {
     viewAll: "Hepsini gör",
     sourceCode: "Kaynak kodu",
     privateSource: "Kurumsal proje — kaynak kodu özel",
+    ongoing: "Devam ediyor",
+    privateResearch: "Ekip araştırması — depo özel",
     enlargeHint: "Büyütmek için tasarımın üzerine tıklayın.",
   },
   home: {
@@ -264,6 +298,16 @@ const tr = {
     subtitle:
       "Ders, staj ve kişisel merak kapsamında geliştirdiğim çalışmalar.",
     items: [
+      {
+        title: "GHAW-NLP — Agentic Workflow Talimatlarının Evrimi",
+        description:
+          "GitHub Actions üzerinde çalışan agentic iş akışlarının doğal dildeki talimatlarının zaman içinde nasıl değiştiğini inceleyen akademik araştırma; ekiple yürütülüyor. Benim sorumluluğumdaki RQ3 bölümünde 173 depodan 406 iş akışının 2.216 sürüm çiftini karşılaştırdım: YAML frontmatter ve gövde değişikliklerini difflib ile ayrıştırdım, yasaklayıcı ifadelerin artışını ölçtüm, Wilcoxon işaretli sıra testi ve rank-biserial etki büyüklüğüyle doğruladım. Sonuçları dört farklı görünümde sağlamasını yapıp makalenin RQ3 ve tartışma bölümünü yazıyorum.",
+      },
+      {
+        title: "Hareketli Kameradan Hareketli Nesne Tespiti",
+        description:
+          "İHA, araç ya da elde taşınan kameradan çekilen videolarda kamera hareketini telafi ederek gerçekten hareket eden nesneleri tespit eden ve takip eden sistem. Optik akış ile kare arası hareketi çıkarıp RANSAC homografisiyle global kamera hareketini kestiriyor, telafi edilmiş karelerde MOG2 ile ön planı ayırıyor ve sınıftan bağımsız Kalman/IoU takipçisiyle kalıcı hareketli nesneleri izliyor.",
+      },
       {
         title: "Full-Stack Su ve Fatura Yönetim Sistemi",
         description:
@@ -394,6 +438,8 @@ const en: typeof tr = {
     viewAll: "View all",
     sourceCode: "Source code",
     privateSource: "Corporate project — source code is private",
+    ongoing: "Ongoing",
+    privateResearch: "Team research — repository is private",
     enlargeHint: "Click a design to enlarge it.",
   },
   home: {
@@ -493,6 +539,16 @@ const en: typeof tr = {
     subtitle:
       "Work built through coursework, internships and personal curiosity.",
     items: [
+      {
+        title: "GHAW-NLP — Evolution of Agentic Workflow Instructions",
+        description:
+          "An academic study, carried out with a team, on how the natural-language instructions of agentic GitHub Actions workflows change over time. RQ3 is my responsibility: I compared 2,216 consecutive version pairs across 406 workflows from 173 repositories, separating YAML frontmatter and body edits with difflib, measuring the growth of prohibition phrases, and validating the findings with the Wilcoxon signed-rank test and rank-biserial effect size. I cross-check every headline number in four views and write the RQ3 and discussion sections of the paper.",
+      },
+      {
+        title: "Moving Object Detection from a Moving Camera",
+        description:
+          "A system that detects and tracks genuinely moving objects in footage from UAV, vehicle or handheld cameras by compensating for camera ego-motion. It estimates inter-frame motion with optical flow, recovers global camera motion through RANSAC homography, extracts the foreground with MOG2 on the compensated frames, and follows persistent movers with a class-agnostic Kalman/IoU tracker.",
+      },
       {
         title: "Full-Stack Water & Billing Management System",
         description:
